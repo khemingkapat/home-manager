@@ -10,4 +10,4 @@ vim.keymap.set("t", "<esc><esc>", function()
   vim.api.nvim_win_close(0, true)
 end)
 
-vim.keymap.set({ "n", "t" }, "<space>tt", ":FloatTerminal<CR>")
+vim.keymap.set({ "n", "t" }, "<space>tt", ":Floaterminal<CR>")
