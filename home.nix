@@ -27,7 +27,6 @@
     pkgs.starship
     pkgs.neovim
     pkgs.lazygit
-    pkgs.blesh
 
 
     # language-server and formatter
@@ -46,7 +45,6 @@
     ./modules/zoxide.nix
     ./modules/lazygit.nix
     ./modules/git.nix
-    ./modules/blesh.nix
   ];
 
   home.file = {
