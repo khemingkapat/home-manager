@@ -48,6 +48,14 @@ local toggle_terminal = function()
   else
     vim.api.nvim_win_hide(state.floating.win)
   end
+  Job_id = vim.bo.channel
+end
+
+local function toggle_lazygit()
+  toggle_terminal()
+  vim.fn.chansend(Job_id, { "lazygit\r" })
 end
 
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
+vim.keymap.set({ "n", "t" }, "<space>tt", toggle_terminal)
+vim.keymap.set({ "n", "t" }, "<space>tg", toggle_lazygit)
