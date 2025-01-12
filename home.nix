@@ -27,7 +27,7 @@
     pkgs.starship
     pkgs.neovim
     pkgs.lazygit
-
+    pkgs.blesh
 
     # language-server and formatter
     pkgs.lua-language-server
