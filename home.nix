@@ -53,7 +53,9 @@
       recursive = true;
       source = config.lib.file.mkOutOfStoreSymlink ./nvim; # to remove the symlink so plugins could be installed by lazy
     };
+    ".blerc".source = ./.blerc;
   };
+
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
