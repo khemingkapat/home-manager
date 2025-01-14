@@ -37,6 +37,7 @@
     pkgs.nil
     pkgs.nixpkgs-fmt
     pkgs.ccls
+    pkgs.postgres-lsp
   ];
 
   imports = [
