@@ -53,7 +53,6 @@
       recursive = true;
       source = config.lib.file.mkOutOfStoreSymlink ./nvim; # to remove the symlink so plugins could be installed by lazy
     };
-    ".blerc".source = ./.blerc;
   };
 
 
