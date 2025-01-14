@@ -27,6 +27,7 @@ return {
       lsp.nil_ls.setup(opts)
       lsp.pyright.setup(opts)
       lsp.ccls.setup(opts)
+      lsp.postgres_lsp.setup(opts)
       --
     end,
   }
