@@ -7,7 +7,8 @@ return {
       null_ls.setup({
         sources = {
           fmt.nixpkgs_fmt,
-          fmt.black
+          fmt.black,
+          fmt.pg_format
         }
       })
 

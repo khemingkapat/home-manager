@@ -36,6 +36,7 @@
     pkgs.nixpkgs-fmt
     pkgs.ccls
     pkgs.postgres-lsp
+    pkgs.pgformatter
   ];
 
   imports = [
