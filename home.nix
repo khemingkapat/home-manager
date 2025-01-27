@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  hmPath = "${config.home.homeDirectory}/.config/home-manager";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -51,8 +54,7 @@
   home.file = {
     ".config/nvim" = {
       enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink ./nvim; # to remove the symlink so plugins could be installed by lazy
+      source = config.lib.file.mkOutOfStoreSymlink "${hmPath}/nvim";
     };
   };
 
@@ -67,6 +69,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
