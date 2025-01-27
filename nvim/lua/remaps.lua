@@ -9,3 +9,5 @@ end)
 vim.keymap.set("t", "<esc><esc>", function()
   vim.api.nvim_win_close(0, true)
 end)
+
+vim.keymap.set("v", "yy", '"+y')
