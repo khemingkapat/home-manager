@@ -40,6 +40,8 @@ in
     pkgs.ccls
     pkgs.postgres-lsp
     pkgs.pgformatter
+    pkgs.asm-lsp
+    pkgs.asmfmt
   ];
 
   imports = [
