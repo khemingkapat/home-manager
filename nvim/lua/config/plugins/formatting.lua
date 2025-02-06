@@ -8,7 +8,8 @@ return {
         sources = {
           fmt.nixpkgs_fmt,
           fmt.black,
-          fmt.pg_format
+          fmt.pg_format,
+          fmt.asmfmt
         }
       })
 
