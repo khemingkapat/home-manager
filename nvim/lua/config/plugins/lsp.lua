@@ -29,6 +29,7 @@ return {
       lsp.ccls.setup(opts)
       lsp.postgres_lsp.setup(opts)
       lsp.asm_lsp.setup(opts)
+      lsp.gopls.setup(opts)
       --
     end,
   }

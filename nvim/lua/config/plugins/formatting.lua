@@ -9,7 +9,8 @@ return {
           fmt.nixpkgs_fmt,
           fmt.black,
           fmt.pg_format,
-          fmt.asmfmt
+          fmt.asmfmt,
+          fmt.gofumpt
         }
       })
 
