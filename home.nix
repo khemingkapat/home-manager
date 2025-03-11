@@ -51,7 +51,7 @@ in
     ./modules/zoxide.nix
     ./modules/lazygit.nix
     ./modules/git.nix
-    ./modules/tmux.nix
+    # ./modules/tmux.nix
   ];
 
   home.file = {
