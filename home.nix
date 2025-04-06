@@ -30,6 +30,7 @@ in
     pkgs.starship
     pkgs.neovim
     pkgs.lazygit
+    pkgs.btop
 
     # language-server and formatter
     pkgs.lua-language-server
