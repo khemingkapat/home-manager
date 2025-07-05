@@ -32,6 +32,11 @@ in
     pkgs.lazygit
     pkgs.btop
 
+    pkgs.wl-clipboard
+    pkgs.firefox
+    pkgs.gnomeExtensions.tactile
+
+
     # language-server and formatter
     pkgs.lua-language-server
     pkgs.pyright
@@ -53,6 +58,7 @@ in
     ./modules/lazygit.nix
     ./modules/git.nix
     # ./modules/tmux.nix
+    ./modules/dconf.nix
   ];
 
   home.file = {
