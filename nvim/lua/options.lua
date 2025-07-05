@@ -8,14 +8,14 @@ opt.syntax = "ON"
 
 -- opt.clipboard = "unnamedplus"
 vim.g.clipboard = {
-  name = "WslClipboard",
+  name = "wl-clipboard",
   copy = {
-    ["+"] = 'clip.exe',
-    ["*"] = 'clip.exe',
+    ["+"] = "wl-copy",
+    ["*"] = "wl-copy",
   },
   paste = {
-    ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ["+"] = 'wl-paste --no-newline',
+    ["*"] = 'wl-paste --no-newline',
   },
   cache_enable = true,
 }
