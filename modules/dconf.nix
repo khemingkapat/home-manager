@@ -8,9 +8,9 @@
       gtk-theme = "Adwaita-dark";
       icon-theme = "Adwaita";
       cursor-theme = "Adwaita";
-      font-name = "Cantarell 16";
-      document-font-name = "Cantarell 16";
-      monospace-font-name = "Source Code Pro 16";
+      # font-name = "Cantarell 16";
+      # document-font-name = "Cantarell 16";
+      # monospace-font-name = "Source Code Pro 16";
     };
 
     "org/gnome/mutter" = {
@@ -38,26 +38,38 @@
         "tactile@lundal.io"
         # Add other extensions here
       ];
-      favorite-apps = [
-        "org.gnome.Nautilus.desktop"
-        "firefox.desktop"
-        "org.gnome.Terminal.desktop"
-        "org.gnome.TextEditor.desktop"
-        "org.gnome.Settings.desktop"
-      ];
+      # favorite-apps = [
+      #   "org.gnome.Nautilus.desktop"
+      #   "firefox.desktop"
+      #   "org.gnome.Terminal.desktop"
+      #   "org.gnome.TextEditor.desktop"
+      #   "org.gnome.Settings.desktop"
+      # ];
     };
+
+    "org/gnome/shell/extensions/tactile" = {
+      col-0 = 2;
+      col-1 = 1;
+      col-2 = 1;
+      col-3 = 2;
+      row-0 = 1;
+      row-1 = 1;
+      gap-size = 32;
+      maximized-threshold = 20;
+    };
+
 
     # Note: Tactile extension settings might need to be configured through
     # the extension's own preferences dialog or different dconf path
 
-    "org/gnome/desktop/session" = {
-      idle-delay = 900; # 15 minutes
-    };
-
-    "org/gnome/settings-daemon/plugins/power" = {
-      sleep-inactive-ac-timeout = 3600; # 1 hour
-      sleep-inactive-battery-timeout = 1800; # 30 minutes
-    };
+    # "org/gnome/desktop/session" = {
+    #   idle-delay = 900; # 15 minutes
+    # };
+    #
+    # "org/gnome/settings-daemon/plugins/power" = {
+    #   sleep-inactive-ac-timeout = 3600; # 1 hour
+    #   sleep-inactive-battery-timeout = 1800; # 30 minutes
+    # };
 
     # Additional useful GNOME settings
     "org/gnome/desktop/privacy" = {
@@ -65,13 +77,13 @@
       send-software-usage-stats = false;
     };
 
-    "org/gnome/desktop/search-providers" = {
-      sort-order = [
-        "org.gnome.Contacts.desktop"
-        "org.gnome.Documents.desktop"
-        "org.gnome.Nautilus.desktop"
-      ];
-    };
+    # "org/gnome/desktop/search-providers" = {
+    #   sort-order = [
+    #     "org.gnome.Contacts.desktop"
+    #     "org.gnome.Documents.desktop"
+    #     "org.gnome.Nautilus.desktop"
+    #   ];
+    # };
 
     "org/gnome/desktop/wm/keybindings" = {
       close = [ "<Super>q" ];
