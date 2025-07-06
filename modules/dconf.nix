@@ -36,6 +36,8 @@
     "org/gnome/shell" = {
       enabled-extensions = [
         "tactile@lundal.io"
+        "space-bar@luchrioh"
+
         # Add other extensions here
       ];
       # favorite-apps = [
@@ -54,7 +56,7 @@
       col-3 = 2;
       row-0 = 1;
       row-1 = 1;
-      gap-size = 32;
+      gap-size = 16;
       maximized-threshold = 20;
     };
 
