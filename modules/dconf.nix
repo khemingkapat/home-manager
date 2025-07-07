@@ -8,19 +8,38 @@
       gtk-theme = "Adwaita-dark";
       icon-theme = "Adwaita";
       cursor-theme = "Adwaita";
-      # font-name = "Cantarell 16";
-      # document-font-name = "Cantarell 16";
-      # monospace-font-name = "Source Code Pro 16";
+      font-name = "JetBrainsMono Nerd Font 16";
+      document-font-name = "JetBrainsMono Nerd Font 16";
+      monospace-font-name = "JetBrainsMono Nerd Font 16";
     };
+
+    "org/gnome/terminal/legacy/profiles:/:default" = {
+      font = "JetBrainsMono Nerd Font 16";
+      use-system-font = false;
+      background-color = "000000";
+      foreground-color = "#d4d4d4";
+      use-theme-colors = false;
+      audible-bell = false;
+      scrollback-lines = 10000;
+    };
+
+
+    "org/gnome/settings-daemon/plugins/power" = {
+      ambient-enabled = false;
+      idle-brightness = 100; # 0-100 scale
+    };
+
 
     "org/gnome/mutter" = {
       dynamic-workspaces = false; # Disable dynamic workspaces
       workspaces-only-on-primary = true;
+      num-workspace = 4;
     };
 
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,maximize,close";
       num-workspaces = 4; # Fixed number of workspaces
+      titlebr-font = "JetBrainsMono Nerd Font Bold 16";
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
@@ -37,6 +56,7 @@
       enabled-extensions = [
         "tactile@lundal.io"
         "space-bar@luchrioh"
+        "switcher@landau.fi"
 
         # Add other extensions here
       ];
@@ -58,6 +78,12 @@
       row-1 = 1;
       gap-size = 16;
       maximized-threshold = 20;
+
+      layout-1 = [ "" ];
+      layout-2 = [ "" ];
+      layout-3 = [ "" ];
+      layout-4 = [ "" ];
+
     };
 
 
@@ -91,14 +117,16 @@
       close = [ "<Super>q" ];
       toggle-maximized = [ "<Super>m" ];
       toggle-fullscreen = [ "<Super>f" ];
-      switch-to-workspace-1 = [ "<Super>1" ];
-      switch-to-workspace-2 = [ "<Super>2" ];
-      switch-to-workspace-3 = [ "<Super>3" ];
-      switch-to-workspace-4 = [ "<Super>4" ];
+      switch-to-workspace-1 = [ "<Super>x" ];
+      switch-to-workspace-2 = [ "<Super>c" ];
+      switch-to-workspace-3 = [ "<Super>v" ];
+      switch-to-workspace-4 = [ "<Super>s" ];
       move-to-workspace-1 = [ "<Super><Shift>1" ];
       move-to-workspace-2 = [ "<Super><Shift>2" ];
       move-to-workspace-3 = [ "<Super><Shift>3" ];
       move-to-workspace-4 = [ "<Super><Shift>4" ];
+
+      activate-window-menu = [ "" ];
     };
 
     # Disable conflicting default GNOME keybindings
@@ -111,6 +139,41 @@
       terminal = [ "<Super>Return" ];
       home = [ "<Super>e" ];
     };
+
+
+    # Disable conflicting shortcuts
+    "org/gnome/shell/keybindings" = {
+      # Disable built-in "switch to application"
+      switch-to-application-1 = [ "" ];
+      switch-to-application-2 = [ "" ];
+      switch-to-application-3 = [ "" ];
+      switch-to-application-4 = [ "" ];
+      switch-to-application-5 = [ "" ];
+      switch-to-application-6 = [ "" ];
+      switch-to-application-7 = [ "" ];
+      switch-to-application-8 = [ "" ];
+      switch-to-application-9 = [ "" ];
+    };
+
+    # Disable Dash to Dock shortcuts if present
+    "org/gnome/shell/extensions/dash-to-dock" = {
+      hot-keys = false; # This disables Super+num for dock
+    };
+
+    "org/gnome/shell/extensions/space-bar" = {
+      enable-activate-workspace-shortcuts = true;
+      enable-move-to-workspace-shortcuts = false;
+      open-menu = [ "<Shift><Super>w" ];
+
+    };
+
+    "org/gnome/shell/extensions/switcher" = {
+      activate-immediately = true;
+      max-width-percentage = 60;
+      show-switcher = [ "<Alt>space" ];
+      workspace-indicator = true;
+    };
+
 
   };
 }
