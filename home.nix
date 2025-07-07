@@ -19,6 +19,7 @@ in
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
+  fonts.fontconfig.enable = true;
   home.packages = [
     pkgs.git
     pkgs.tree
@@ -35,6 +36,9 @@ in
     pkgs.wl-clipboard
     pkgs.firefox
     pkgs.gnomeExtensions.tactile
+    pkgs.gnomeExtensions.space-bar
+    pkgs.gnomeExtensions.switcher
+    pkgs.nerd-fonts.jetbrains-mono
 
 
     # language-server and formatter
@@ -61,12 +65,27 @@ in
     ./modules/dconf.nix
   ];
 
+
   home.file = {
     ".config/nvim" = {
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${hmPath}/nvim";
     };
   };
+
+  systemd.user.services.gnome-settings-delay = {
+    Unit = {
+      Description = "Apply GNOME settings after delay";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStartPre = "/run/current-system/sw/bin/sleep 5";
+      ExecStart = "/run/current-system/sw/bin/home-manager switch";
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
+
 
 
   # Home Manager can also manage your environment variables through
@@ -83,4 +102,5 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
 }
