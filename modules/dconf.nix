@@ -8,13 +8,13 @@
       gtk-theme = "Adwaita-dark";
       icon-theme = "Adwaita";
       cursor-theme = "Adwaita";
-      font-name = "JetBrainsMono Nerd Font 16";
-      document-font-name = "JetBrainsMono Nerd Font 16";
-      monospace-font-name = "JetBrainsMono Nerd Font 16";
+      font-name = "JetBrainsMono Nerd Font 12";
+      document-font-name = "JetBrainsMono Nerd Font 12";
+      monospace-font-name = "JetBrainsMono Nerd Font 12";
     };
 
     "org/gnome/terminal/legacy/profiles:/:default" = {
-      font = "JetBrainsMono Nerd Font 16";
+      font = "JetBrainsMono Nerd Font 12";
       use-system-font = false;
       background-color = "000000";
       foreground-color = "#d4d4d4";
