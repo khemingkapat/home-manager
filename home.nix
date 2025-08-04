@@ -7,6 +7,7 @@ in
   # manage.
   home.username = "khemi";
   home.homeDirectory = "/home/khemi";
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -32,6 +33,7 @@ in
     pkgs.neovim
     pkgs.lazygit
     pkgs.btop
+    pkgs.zellij
 
     pkgs.wl-clipboard
     pkgs.firefox
@@ -39,7 +41,8 @@ in
     pkgs.gnomeExtensions.space-bar
     pkgs.gnomeExtensions.switcher
     pkgs.nerd-fonts.jetbrains-mono
-
+    pkgs.auto-cpufreq
+    pkgs.obsidian
 
     # language-server and formatter
     pkgs.lua-language-server
@@ -61,10 +64,11 @@ in
     ./modules/zoxide.nix
     ./modules/lazygit.nix
     ./modules/git.nix
-    # ./modules/tmux.nix
     ./modules/dconf.nix
-  ];
+    ./modules/zellij.nix
+    # ./modules/manoonchai.nix
 
+  ];
 
   home.file = {
     ".config/nvim" = {
@@ -73,20 +77,18 @@ in
     };
   };
 
-  systemd.user.services.gnome-settings-delay = {
-    Unit = {
-      Description = "Apply GNOME settings after delay";
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      Type = "oneshot";
-      ExecStartPre = "/run/current-system/sw/bin/sleep 5";
-      ExecStart = "/run/current-system/sw/bin/home-manager switch";
-    };
-    Install.WantedBy = [ "default.target" ];
-  };
-
-
+  # systemd.user.services.gnome-settings-delay = {
+  #   Unit = {
+  #     Description = "Apply GNOME settings after delay";
+  #     After = [ "graphical-session.target" ];
+  #   };
+  #   Service = {
+  #     Type = "oneshot";
+  #     ExecStartPre = "/run/current-system/sw/bin/sleep 5";
+  #     ExecStart = "/run/current-system/sw/bin/home-manager switch";
+  #   };
+  #   Install.WantedBy = [ "default.target" ];
+  # };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -99,8 +101,13 @@ in
     EDITOR = "nvim";
   };
 
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # programs.manoonchai = {
+  #   enable = true;
+  #   switchKey = "grp:win_space_toggle"; # Win+Space to switch layouts
+  #   # autoInstall = true;  # Optional: auto-install on first run
+  # };
 
 }
