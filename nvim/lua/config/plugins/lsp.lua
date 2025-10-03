@@ -26,11 +26,14 @@ return {
       lsp.lua_ls.setup(opts)
       lsp.nil_ls.setup(opts)
       lsp.pyright.setup(opts)
-      lsp.ccls.setup(opts)
+      lsp.clangd.setup(opts)
       lsp.postgres_lsp.setup(opts)
       lsp.asm_lsp.setup(opts)
       lsp.gopls.setup(opts)
-      --
+      lsp.ts_ls.setup(opts)
+
+
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<space>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<space>gr", vim.lsp.buf.references, {})

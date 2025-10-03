@@ -7,11 +7,12 @@ return {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     config = function()
+      local actions = require("telescope.actions")
       require('telescope').setup({
-        -- pickers = {
-        --   find_files = { theme = "ivy" },
-        --   help_tags = { theme = "ivy" },
-        -- }
+        pickers = {
+          find_files = { theme = "ivy", no_ignore = true },
+          help_tags = { theme = "ivy" },
+        },
       })
 
       local tsb = require('telescope.builtin')
