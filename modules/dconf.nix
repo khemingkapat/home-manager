@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # GNOME dconf settings
@@ -8,9 +13,9 @@
       gtk-theme = "Adwaita-dark";
       icon-theme = "Adwaita";
       cursor-theme = "Adwaita";
-      font-name = "JetBrainsMono Nerd Font 12";
-      document-font-name = "JetBrainsMono Nerd Font 12";
-      monospace-font-name = "JetBrainsMono Nerd Font 12";
+      # font-name = "Noto Sans 12";
+      # document-font-name = "Noto Sans 12";
+      # monospace-font-name = "JetBrainsMono Nerd Font 12";
     };
 
     "org/gnome/terminal/legacy/profiles:/:default" = {
@@ -23,23 +28,22 @@
       scrollback-lines = 10000;
     };
 
-
     "org/gnome/settings-daemon/plugins/power" = {
       ambient-enabled = false;
       idle-brightness = 100; # 0-100 scale
+      power-button-action = "suspend";
     };
-
 
     "org/gnome/mutter" = {
       dynamic-workspaces = false; # Disable dynamic workspaces
-      workspaces-only-on-primary = true;
+      workspaces-only-on-primary = false;
       num-workspace = 4;
     };
 
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,maximize,close";
       num-workspaces = 4; # Fixed number of workspaces
-      titlebr-font = "JetBrainsMono Nerd Font Bold 16";
+      titlebar-font = "Noto Sans Bold 11";
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
@@ -86,7 +90,6 @@
 
     };
 
-
     # Note: Tactile extension settings might need to be configured through
     # the extension's own preferences dialog or different dconf path
 
@@ -127,6 +130,8 @@
       move-to-workspace-4 = [ "<Super><Shift>4" ];
 
       activate-window-menu = [ "" ];
+      switch-input-source = [ "<Super>space" ];
+      switch-input-source-backward = [ "<Super><Shift>space" ];
     };
 
     # Disable conflicting default GNOME keybindings
@@ -139,7 +144,6 @@
       terminal = [ "<Super>Return" ];
       home = [ "<Super>e" ];
     };
-
 
     # Disable conflicting shortcuts
     "org/gnome/shell/keybindings" = {
@@ -170,10 +174,35 @@
     "org/gnome/shell/extensions/switcher" = {
       activate-immediately = true;
       max-width-percentage = 60;
-      show-switcher = [ "<Alt>space" ];
+      show-switcher = [ "<Alt>Tab" ];
       workspace-indicator = true;
     };
 
+    "org/gnome/desktop/input-sources" = {
+      # Correct syntax: use lib.hm.gvariant.mkTuple for dconf tuples
+      sources = [
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "us"
+        ]) # English US
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "th"
+        ]) # Thai
+      ];
+
+      # Optional: Configure switching behavior
+      mru-sources = [
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "us"
+        ])
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "th"
+        ])
+      ];
+    };
 
   };
 }

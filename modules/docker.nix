@@ -1,0 +1,5 @@
+{
+  programs.docker = {
+    enable = true;
+  };
+}

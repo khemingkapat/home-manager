@@ -24,7 +24,7 @@ in
   home.packages = [
     pkgs.git
     pkgs.tree
-    pkgs.gcc
+    pkgs.gcc13
     pkgs.tmux
     pkgs.fzf
     pkgs.bat
@@ -34,6 +34,8 @@ in
     pkgs.lazygit
     pkgs.btop
     pkgs.zellij
+    pkgs.gnumake
+    pkgs.libgcc
 
     pkgs.wl-clipboard
     pkgs.firefox
@@ -41,8 +43,10 @@ in
     pkgs.gnomeExtensions.space-bar
     pkgs.gnomeExtensions.switcher
     pkgs.nerd-fonts.jetbrains-mono
+    pkgs.noto-fonts
+    pkgs.noto-fonts-color-emoji
     pkgs.auto-cpufreq
-    pkgs.obsidian
+    # pkgs.obsidian
 
     # language-server and formatter
     pkgs.lua-language-server
@@ -55,6 +59,9 @@ in
     pkgs.pgformatter
     pkgs.asm-lsp
     pkgs.asmfmt
+
+    # some dev
+    pkgs.docker
   ];
 
   imports = [
@@ -66,6 +73,8 @@ in
     ./modules/git.nix
     ./modules/dconf.nix
     ./modules/zellij.nix
+    ./modules/obsidian.nix
+    ./modules/docker.nix
     # ./modules/manoonchai.nix
 
   ];
