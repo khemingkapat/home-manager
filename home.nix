@@ -72,7 +72,6 @@ in
     ./modules/dconf.nix
     ./modules/zellij.nix
     ./modules/obsidian.nix
-    ./modules/docker.nix
     # ./modules/manoonchai.nix
 
   ];
