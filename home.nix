@@ -60,8 +60,6 @@ in
     pkgs.asm-lsp
     pkgs.asmfmt
 
-    # some dev
-    pkgs.docker
   ];
 
   imports = [
