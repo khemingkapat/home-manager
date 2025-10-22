@@ -72,6 +72,7 @@ in
     ./modules/dconf.nix
     ./modules/zellij.nix
     ./modules/obsidian.nix
+    ./modules/switcher.nix
     # ./modules/manoonchai.nix
 
   ];

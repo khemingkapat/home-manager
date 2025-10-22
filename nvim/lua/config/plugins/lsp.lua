@@ -31,8 +31,26 @@ return {
       lsp.asm_lsp.setup(opts)
       lsp.gopls.setup(opts)
       lsp.ts_ls.setup(opts)
-
-
+      lsp.julials.setup({
+        cmd = {
+          "julia",
+          "--project=@.", -- use the local Julia environment
+          "--startup-file=no",
+          "--history-file=no",
+          "-e",
+          [[
+            using LanguageServer, SymbolServer;
+            depot_path = get(ENV, "JULIA_DEPOT_PATH", "");
+            project_path = dirname(something(Base.current_project(pwd()), Base.active_project()));
+            server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);
+            server.runlinter = true;
+            run(server);
+          ]],
+        },
+        filetypes = { "julia" },
+        root_dir = lsp.util.root_pattern("Project.toml", ".git"),
+        capabilities = capabilities,
+      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<space>gd", vim.lsp.buf.definition, {})
