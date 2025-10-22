@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 
 {
@@ -60,7 +59,6 @@
       enabled-extensions = [
         "tactile@lundal.io"
         "space-bar@luchrioh"
-        "switcher@landau.fi"
 
         # Add other extensions here
       ];
@@ -169,13 +167,6 @@
       enable-move-to-workspace-shortcuts = false;
       open-menu = [ "<Shift><Super>w" ];
 
-    };
-
-    "org/gnome/shell/extensions/switcher" = {
-      activate-immediately = true;
-      max-width-percentage = 60;
-      show-switcher = [ "<Alt>Tab" ];
-      workspace-indicator = true;
     };
 
     "org/gnome/desktop/input-sources" = {
