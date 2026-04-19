@@ -7,11 +7,12 @@
     # initExtra = ''
     #   clear
     # '';
-    profileExtra = '' source $HOME/.config/home-manager/.profile '';
+    profileExtra = ''source $HOME/.config/home-manager/.profile '';
     enableCompletion = true;
     shellAliases = {
       hm = "home-manager";
       ".." = "cd ..";
+      zdev = "zellij --layout ./dev.kdl";
     };
   };
 }
