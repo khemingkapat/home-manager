@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  nixgl,
+  ...
+}:
 let
   hmPath = "${config.home.homeDirectory}/.config/home-manager";
 in
@@ -38,7 +43,7 @@ in
     pkgs.libgcc
 
     pkgs.wl-clipboard
-    pkgs.firefox
+    # pkgs.firefox
     pkgs.gnomeExtensions.tactile
     pkgs.gnomeExtensions.space-bar
     pkgs.gnomeExtensions.switcher
@@ -73,9 +78,27 @@ in
     ./modules/zellij.nix
     ./modules/obsidian.nix
     ./modules/switcher.nix
+    # ./modules/nixgl.nix
     # ./modules/manoonchai.nix
 
   ];
+  nixGL = {
+    # 1. Tell home-manager to use the nixGL packages
+    packages = nixgl.packages;
+
+    # 2. Tell nixGL to use the 'mesa' wrapper (correct for your Intel GPU)
+    defaultWrapper = "mesa";
+  };
+  # ----------------------------------
+
+  # --- ADD THIS SECTION FOR FIREFOX ---
+  programs.firefox = {
+    enable = true;
+
+    # 3. This is the fix:
+    # We wrap the Firefox package with the nixGL library
+    package = config.lib.nixGL.wrap pkgs.firefox;
+  };
 
   home.file = {
     ".config/nvim" = {
