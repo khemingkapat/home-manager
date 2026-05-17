@@ -80,7 +80,6 @@
       grep = "rg --color=auto";
       diff = "diff --color=auto";
       df = "df -h";
-      vim = "nvim";
 
       # git
       glog = ''PAGER="less -F -X" git log'';
@@ -92,7 +91,7 @@
     };
 
     # ── initExtra: runs at the end of the generated .zshrc ───────────────────
-    initExtra = ''
+    initContent = ''
       # ── Completion behaviour ─────────────────────────────────────────────────
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -133,15 +132,26 @@
         ZVM_VI_HIGHLIGHT_EXTRASTYLE=none
       }
 
+      # ZVM_LAZY_KEYBINDINGS defers zsh-vi-mode's widget wrapping until the first
+      # Esc press — this lets zsh-autosuggestions register its widgets first,
+      # which is what makes autosuggestions actually work alongside vi-mode.
+      ZVM_LAZY_KEYBINDINGS=true
+
       # zsh-vi-mode resets all ZLE bindings after loading; zvm_after_init is the
       # correct hook to re-apply custom bindings so they survive.
       zvm_after_init() {
-        bindkey '^[[1;5C' forward-word               # Ctrl+Right — forward word
-        bindkey '^[[1;5D' backward-word              # Ctrl+Left  — backward word
-        bindkey '^F'      _fzf_file_no_hidden        # Ctrl+F     — fzf (no hidden)
-        bindkey '^\' autosuggest-toggle              # Ctrl+\     — toggle suggestions
-        bindkey '^[[A' history-substring-search-up   # Up arrow   — history search
-        bindkey '^[[B' history-substring-search-down # Down arrow — history search
+        # Ctrl+R — fzf history search (overrides zsh-vi-mode's own Ctrl+R)
+        bindkey '^R' fzf-history-widget
+
+        # Ctrl+F — fzf file picker, hidden files excluded
+        bindkey '^F' _fzf_file_no_hidden
+
+        # Ctrl+\ — toggle autosuggestions
+        bindkey '^\' autosuggest-toggle
+
+        # Up/Down arrows — history search by prefix
+        bindkey '^[[A' history-substring-search-up
+        bindkey '^[[B' history-substring-search-down
       }
 
       # ── Default-shell reminder ───────────────────────────────────────────────
@@ -150,6 +160,20 @@
         print -P "%F{yellow}⚠  Your default shell is not zsh.%f"
         print -P "%F{cyan}   To fix it, run: %F{white}chsh -s \$(which zsh)%f"
         print -P "%F{cyan}   Then log out and back in for the change to take effect.%f"
+      fi
+    '';
+
+    # ── Login shell setup (.zprofile equivalent) ──────────────────────────────
+    # Zsh doesn't read ~/.profile, so Nix's PATH would be lost after switching
+    # the default shell to zsh. This sources the same Nix init that your
+    # .profile was doing, making nvim, home-manager, etc. available again.
+    profileExtra = ''
+      if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+        source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+      fi
+      # Also pick up home-manager's session variables (hm-session-vars.sh)
+      if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+        source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       fi
     '';
 
