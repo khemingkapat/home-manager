@@ -78,6 +78,7 @@ in
     ./modules/zellij.nix
     ./modules/obsidian.nix
     ./modules/switcher.nix
+    ./modules/zsh.nix
     # ./modules/nixgl.nix
     # ./modules/manoonchai.nix
 
