@@ -2,7 +2,6 @@
   description = "Home Manager configuration of khemi";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -12,29 +11,24 @@
   };
 
   outputs =
-    {
-      nixpkgs,
-      home-manager,
-      nixgl,
-      ...
+    { nixpkgs
+    , home-manager
+    , nixgl
+    , ...
     }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      mkHome =
+        { isDesktop }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ];
+          extraSpecialArgs = { inherit nixgl isDesktop; };
+        };
     in
     {
-      homeConfigurations."khemi" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-        extraSpecialArgs = {
-          inherit nixgl;
-        };
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
+      homeConfigurations."khemi" = mkHome { isDesktop = true; };
+      homeConfigurations."khemi-wsl" = mkHome { isDesktop = false; };
     };
 }
