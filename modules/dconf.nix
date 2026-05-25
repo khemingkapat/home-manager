@@ -1,7 +1,8 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 
 {
@@ -17,13 +18,9 @@
       # monospace-font-name = "JetBrainsMono Nerd Font 12";
     };
 
-    "org/gnome/terminal/legacy/profiles:/:default" = {
-      font = "JetBrainsMono Nerd Font 12";
+    "org/gnome/terminal/legacy/profiles:/:492887b6-2125-4d0e-b225-e4585c34e983" = {
+      font = "JetBrainsMono Nerd Font 22";
       use-system-font = false;
-      background-color = "000000";
-      foreground-color = "#d4d4d4";
-      use-theme-colors = false;
-      audible-bell = false;
       scrollback-lines = 10000;
     };
 
