@@ -36,10 +36,9 @@ return {
       lsp.julials.setup({
         capabilities = capabilities,
         on_new_config = function(new_config, new_root_dir)
-          -- This tells Julia to use the project folder as the environment
-          -- but still allows it to find LanguageServer in your global env
           new_config.cmd = {
             "julia",
+            "--sysimage=/home/khemi/.julia/lsp_sysimage.so",
             "--project=" .. new_root_dir,
             "--startup-file=no",
             "--history-file=no",
@@ -52,34 +51,6 @@ return {
           return util.root_pattern("Project.toml", "Manifest.toml", ".git")(fname) or vim.fn.getcwd()
         end,
       })
-      -- lsp.julials.setup({
-      --   on_new_config = function(new_config, new_root_dir)
-      --     -- This ensures Julia uses the specific project directory as the environment
-      --     new_config.cmd = {
-      --       "julia",
-      --       "--project=" .. new_root_dir,
-      --       "--startup-file=no",
-      --       "--history-file=no",
-      --       "-e",
-      --       [[
-      --   using LanguageServer;
-      --   depot_path = get(ENV, "JULIA_DEPOT_PATH", "");
-      --   project_path = "]] .. new_root_dir .. [[";
-      --   server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path);
-      --   server.runlinter = true;
-      --   run(server);
-      -- ]]
-      --     }
-      --   end,
-      --   root_dir = function(fname)
-      --     local root = util.root_pattern("Project.toml", "Manifest.toml", ".git")(fname)
-      --     return root or vim.fn.getcwd()
-      --   end,
-      --
-      --   filetypes = { "julia" },
-      --   capabilities = capabilities,
-      -- })
-
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<space>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<space>gr", vim.lsp.buf.references, {})
