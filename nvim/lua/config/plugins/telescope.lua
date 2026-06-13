@@ -13,7 +13,8 @@ return {
           find_files = {
             layout_strategy = "bottom_pane",
             layout_config = {
-              height = 0.4,
+              height = 0.5,
+              width = 0.8,
             },
           },
           help_tags = { theme = "ivy" },
