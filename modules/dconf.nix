@@ -19,7 +19,7 @@
     };
 
     "org/gnome/terminal/legacy/profiles:/:492887b6-2125-4d0e-b225-e4585c34e983" = {
-      font = "JetBrainsMono Nerd Font 22";
+      font = "JetBrainsMono Nerd Font 18";
       use-system-font = false;
       scrollback-lines = 10000;
     };
