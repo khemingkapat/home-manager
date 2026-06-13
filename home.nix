@@ -1,10 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  nixgl,
-  isDesktop,
-  ...
+{ config
+, pkgs
+, lib
+, nixgl
+, isDesktop
+, ...
 }:
 let
   hmPath = "${config.home.homeDirectory}/.config/home-manager";
@@ -34,6 +33,8 @@ in
       pkgs.zellij
       pkgs.gnumake
       pkgs.libgcc
+      pkgs.neofetch
+      pkgs.antigravity
 
       # ── LSPs & formatters (always) ───────────────────────────────────
       pkgs.lua-language-server
