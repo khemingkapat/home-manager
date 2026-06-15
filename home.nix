@@ -1,9 +1,10 @@
-{ config
-, pkgs
-, lib
-, nixgl
-, isDesktop
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  nixgl,
+  isDesktop,
+  ...
 }:
 let
   hmPath = "${config.home.homeDirectory}/.config/home-manager";
@@ -12,73 +13,71 @@ in
   home.username = "khemi";
   home.homeDirectory = "/home/khemi";
   nixpkgs.config.allowUnfree = true;
-  home.stateVersion = "24.11";
+  home.stateVersion = "26.11";
 
   fonts.fontconfig.enable = true;
 
-  home.packages =
-    [
-      # ── cli tools (always) ───────────────────────────────────────────
-      pkgs.git
-      pkgs.tree
-      pkgs.gcc13
-      pkgs.tmux
-      pkgs.fzf
-      pkgs.bat
-      pkgs.ripgrep
-      pkgs.starship
-      pkgs.neovim
-      pkgs.lazygit
-      pkgs.btop
-      pkgs.zellij
-      pkgs.gnumake
-      pkgs.libgcc
-      pkgs.neofetch
-      pkgs.antigravity
+  home.packages = [
+    # ── cli tools (always) ───────────────────────────────────────────
+    pkgs.git
+    pkgs.tree
+    pkgs.gcc13
+    pkgs.tmux
+    pkgs.fzf
+    pkgs.bat
+    pkgs.ripgrep
+    pkgs.starship
+    pkgs.neovim
+    pkgs.lazygit
+    pkgs.btop
+    pkgs.zellij
+    pkgs.gnumake
+    pkgs.libgcc
+    pkgs.fastfetch
+    pkgs.antigravity-cli
 
-      # ── LSPs & formatters (always) ───────────────────────────────────
-      pkgs.lua-language-server
-      pkgs.pyright
-      pkgs.black
-      pkgs.nil
-      pkgs.nixpkgs-fmt
-      pkgs.ccls
-      pkgs.postgres-lsp
-      pkgs.pgformatter
-      pkgs.asm-lsp
-      pkgs.asmfmt
+    # ── LSPs & formatters (always) ───────────────────────────────────
+    pkgs.lua-language-server
+    pkgs.pyright
+    pkgs.black
+    pkgs.nil
+    pkgs.nixpkgs-fmt
+    pkgs.ccls
+    pkgs.postgres-lsp
+    pkgs.pgformatter
+    pkgs.asm-lsp
+    pkgs.asmfmt
 
-    ]
-    ++ lib.optionals isDesktop [
-      # ── desktop only ─────────────────────────────────────────────────
-      pkgs.wl-clipboard
-      pkgs.gnomeExtensions.tactile
-      pkgs.gnomeExtensions.space-bar
-      pkgs.gnomeExtensions.switcher
-      pkgs.nerd-fonts.jetbrains-mono
-      pkgs.noto-fonts
-      pkgs.noto-fonts-color-emoji
-      pkgs.auto-cpufreq
-    ];
+  ]
+  ++ lib.optionals isDesktop [
+    # ── desktop only ─────────────────────────────────────────────────
+    pkgs.wl-clipboard
+    pkgs.gnomeExtensions.tactile
+    pkgs.gnomeExtensions.space-bar
+    pkgs.gnomeExtensions.switcher
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.noto-fonts
+    pkgs.noto-fonts-color-emoji
+    pkgs.auto-cpufreq
+  ];
 
-  imports =
-    [
-      # ── always ───────────────────────────────────────────────────────
-      ./modules/bash.nix
-      ./modules/starship.nix
-      ./modules/fzf.nix
-      ./modules/zoxide.nix
-      ./modules/lazygit.nix
-      ./modules/git.nix
-      ./modules/zellij.nix
-      ./modules/zsh.nix
-    ]
-    ++ lib.optionals isDesktop [
-      # ── desktop only ─────────────────────────────────────────────────
-      ./modules/dconf.nix
-      ./modules/switcher.nix
-      ./modules/obsidian.nix
-    ];
+  imports = [
+    # ── always ───────────────────────────────────────────────────────
+    ./modules/bash.nix
+    ./modules/starship.nix
+    ./modules/fzf.nix
+    ./modules/zoxide.nix
+    ./modules/lazygit.nix
+    ./modules/git.nix
+    ./modules/zellij.nix
+    ./modules/zsh.nix
+  ]
+  ++ lib.optionals isDesktop [
+    # ── desktop only ─────────────────────────────────────────────────
+    ./modules/dconf.nix
+    ./modules/switcher.nix
+    ./modules/obsidian.nix
+  ];
 
   nixGL = lib.mkIf isDesktop {
     packages = nixgl.packages;
