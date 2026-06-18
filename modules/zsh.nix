@@ -15,7 +15,7 @@
   # ── ZSH via Home Manager ─────────────────────────────────────────────────────
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh"; # keeps ~ clean; zsh reads from $ZDOTDIR
+    dotDir = "${config.home.homeDirectory}/.config/zsh"; # keeps ~ clean; zsh reads from $ZDOTDIR
 
     # ── History ────────────────────────────────────────────────────────────────
     history = {
@@ -39,14 +39,14 @@
       {
         name = "zsh-autosuggestions";
         src = pkgs.zsh-autosuggestions;
-        file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+        file = "share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh";
       }
       {
         # must come before zsh-vi-mode (which resets bindings) so that
         # the widget exists when we re-bind arrows inside zvm_after_init
         name = "zsh-history-substring-search";
         src = pkgs.zsh-history-substring-search;
-        file = "share/zsh-history-substring-search/zsh-history-substring-search.zsh";
+        file = "share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh";
       }
       {
         # zsh-vi-mode resets all ZLE bindings on init; custom bindings
@@ -59,7 +59,7 @@
         # load last — FSH wraps ZLE widgets and must see all other widgets first
         name = "fast-syntax-highlighting";
         src = pkgs.zsh-fast-syntax-highlighting;
-        file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
+        file = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
       }
     ];
 

@@ -34,7 +34,6 @@ in
     pkgs.gnumake
     pkgs.libgcc
     pkgs.fastfetch
-    pkgs.antigravity-cli
 
     # ── LSPs & formatters (always) ───────────────────────────────────
     pkgs.lua-language-server
@@ -43,7 +42,7 @@ in
     pkgs.nil
     pkgs.nixpkgs-fmt
     pkgs.ccls
-    pkgs.postgres-lsp
+    pkgs.postgres-language-server
     pkgs.pgformatter
     pkgs.asm-lsp
     pkgs.asmfmt
@@ -79,7 +78,7 @@ in
     ./modules/obsidian.nix
   ];
 
-  nixGL = lib.mkIf isDesktop {
+  targets.genericLinux.nixGL = lib.mkIf isDesktop {
     packages = nixgl.packages;
     defaultWrapper = "mesa";
   };

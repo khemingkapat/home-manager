@@ -53,6 +53,7 @@
     };
 
     "org/gnome/shell" = {
+      disable-extension-version-validation = true;
       enabled-extensions = [
         "tactile@lundal.io"
         "space-bar@luchrioh"
@@ -159,11 +160,14 @@
       hot-keys = false; # This disables Super+num for dock
     };
 
-    "org/gnome/shell/extensions/space-bar" = {
+    "org/gnome/shell/extensions/space-bar/shortcuts" = {
       enable-activate-workspace-shortcuts = true;
       enable-move-to-workspace-shortcuts = false;
       open-menu = [ "<Shift><Super>w" ];
+    };
 
+    "org/gnome/shell/extensions/space-bar/behavior" = {
+      position = "right";
     };
 
     "org/gnome/desktop/input-sources" = {
