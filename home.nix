@@ -34,6 +34,8 @@ in
     pkgs.gnumake
     pkgs.libgcc
     pkgs.fastfetch
+    pkgs.gh
+    pkgs.jless
 
     # ── LSPs & formatters (always) ───────────────────────────────────
     pkgs.lua-language-server
