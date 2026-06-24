@@ -32,7 +32,7 @@
 
     "org/gnome/mutter" = {
       dynamic-workspaces = false; # Disable dynamic workspaces
-      workspaces-only-on-primary = false;
+      workspaces-only-on-primary = true;
       num-workspace = 4;
     };
 
