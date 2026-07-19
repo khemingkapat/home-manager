@@ -70,6 +70,7 @@ in
     ./modules/dconf.nix
     ./modules/switcher.nix
     ./modules/obsidian.nix
+    ./modules/auto-power-settings.nix
   ];
 
   targets.genericLinux.nixGL = lib.mkIf isDesktop {
