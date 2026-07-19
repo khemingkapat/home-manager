@@ -7,15 +7,21 @@ return {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     config = function()
+      local actions = require("telescope.actions")
       require('telescope').setup({
-        -- pickers = {
-        --   find_files = { theme = "ivy" },
-        --   help_tags = { theme = "ivy" },
-        -- }
+        pickers = {
+          find_files = {
+            layout_strategy = "bottom_pane",
+            layout_config = {
+              height = 0.5,
+              width = 0.8,
+            },
+          },
+          help_tags = { theme = "ivy" },
+        },
       })
 
       local tsb = require('telescope.builtin')
-
       vim.keymap.set("n", "<space>ff", tsb.find_files)
       vim.keymap.set("n", "<space>fh", tsb.help_tags)
 

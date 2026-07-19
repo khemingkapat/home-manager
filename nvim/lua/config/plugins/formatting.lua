@@ -4,21 +4,43 @@ return {
     config = function()
       local null_ls = require("null-ls")
       local fmt = null_ls.builtins.formatting
+      -- local diag = null_ls.builtins.diagnostics
       null_ls.setup({
         sources = {
           fmt.nixpkgs_fmt,
           fmt.black,
           fmt.pg_format,
           fmt.asmfmt,
-          fmt.gofumpt
+          fmt.gofumpt,
+          fmt.prettier,
         }
       })
 
       -- formatting keymap
       vim.keymap.set("n", "<space>fm", function()
-        print("formatted")
-        vim.lsp.buf.format()
+        local bufnr = vim.api.nvim_get_current_buf()
+        -- get all attached clients that support formatting
+        local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+        local fmt_clients = {}
+
+        for _, client in ipairs(clients) do
+          if client.supports_method("textDocument/formatting") then
+            table.insert(fmt_clients, client.name)
+          end
+        end
+
+        if #fmt_clients == 0 then
+          print("No formatter attached")
+          return
+        end
+
+        -- do the formatting
+        vim.lsp.buf.format({ bufnr = bufnr, async = true })
+
+        -- print the formatters used
+        print("Formatted by: " .. table.concat(fmt_clients, ", "))
       end)
+
       --
       --
       --

@@ -7,7 +7,9 @@ local M = {}
 
 local live_multigrep = function(opts)
   opts = opts or {} -- default opts
-  opts.cwd = opts.cwd or vim.uv.cwd()
+  local uv = vim.uv or vim.loop
+  opts.cwd = opts.cwd or uv.cwd()
+
 
 
   local finder = finders.new_async_job({
@@ -34,7 +36,7 @@ local live_multigrep = function(opts)
   })
 
   pickers.new(opts, {
-    debouce = 100,
+    debounce = 100,
     prompt_title = "Multi Grep",
     finder = finder,
     previewer = conf.grep_previewer(opts),
