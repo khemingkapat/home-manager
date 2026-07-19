@@ -19,38 +19,17 @@ return {
 
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      local lsp = require("lspconfig")
-      local util = require('lspconfig.util')
 
+      local servers = {
+        "lua_ls", "nil_ls", "pyright", "clangd",
+        "postgres_lsp", "asm_lsp", "gopls", "ts_ls"
+      }
 
-      local opts = { capabilities = capabilities }
+      for _, server in ipairs(servers) do
+        vim.lsp.config(server, { capabilities = capabilities })
+        vim.lsp.enable(server)
+      end
 
-      lsp.lua_ls.setup(opts)
-      lsp.nil_ls.setup(opts)
-      lsp.pyright.setup(opts)
-      lsp.clangd.setup(opts)
-      lsp.postgres_lsp.setup(opts)
-      lsp.asm_lsp.setup(opts)
-      lsp.gopls.setup(opts)
-      lsp.ts_ls.setup(opts)
-      lsp.julials.setup({
-        capabilities = capabilities,
-        on_new_config = function(new_config, new_root_dir)
-          new_config.cmd = {
-            "julia",
-            "--sysimage=/home/khemi/.julia/lsp_sysimage.so",
-            "--project=" .. new_root_dir,
-            "--startup-file=no",
-            "--history-file=no",
-            "-e",
-            "using LanguageServer; runserver()",
-          }
-        end,
-        root_dir = function(fname)
-          -- This looks for Project.toml or Manifest.toml to find the project root
-          return util.root_pattern("Project.toml", "Manifest.toml", ".git")(fname) or vim.fn.getcwd()
-        end,
-      })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<space>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<space>gr", vim.lsp.buf.references, {})

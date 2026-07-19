@@ -20,11 +20,11 @@ return {
       vim.keymap.set("n", "<space>fm", function()
         local bufnr = vim.api.nvim_get_current_buf()
         -- get all attached clients that support formatting
-        local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+        local clients = vim.lsp.get_clients({ bufnr = bufnr })
         local fmt_clients = {}
 
         for _, client in ipairs(clients) do
-          if client.supports_method("textDocument/formatting") then
+          if client:supports_method("textDocument/formatting") then
             table.insert(fmt_clients, client.name)
           end
         end
@@ -53,7 +53,7 @@ return {
           end
 
           ---@diagnostic disable-next-line: missing-parameter
-          if client.supports_method('textDocument/formatting') then
+          if client:supports_method('textDocument/formatting') then
             vim.api.nvim_create_autocmd('BufWritePre', {
               buffer = args.buf,
               callback = function()

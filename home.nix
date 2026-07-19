@@ -1,10 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  nixgl,
-  isDesktop,
-  ...
+{ config
+, pkgs
+, lib
+, nixgl
+, isDesktop
+, ...
 }:
 let
   hmPath = "${config.home.homeDirectory}/.config/home-manager";
@@ -13,7 +12,7 @@ in
   home.username = "khemi";
   home.homeDirectory = "/home/khemi";
   nixpkgs.config.allowUnfree = true;
-  home.stateVersion = "26.11";
+  home.stateVersion = "26.05";
 
   fonts.fontconfig.enable = true;
 
@@ -39,15 +38,8 @@ in
 
     # ── LSPs & formatters (always) ───────────────────────────────────
     pkgs.lua-language-server
-    pkgs.pyright
-    pkgs.black
     pkgs.nil
     pkgs.nixpkgs-fmt
-    pkgs.ccls
-    pkgs.postgres-language-server
-    pkgs.pgformatter
-    pkgs.asm-lsp
-    pkgs.asmfmt
 
   ]
   ++ lib.optionals isDesktop [
